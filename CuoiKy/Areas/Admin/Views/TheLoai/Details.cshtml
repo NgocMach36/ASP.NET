@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <h3>Chi tiết thể loại</h3>
+<p> <b>ID:</b> @ViewBag.theLoai.Id </p>
+<p><b>Tên thể loại: </b> @ViewBag.theLoai.Name</p>
+<p><b>Ngày tạo: </b> @String.Format("{0:dd/MM/yyyy}", ViewBag.theLoai.DateCreate)</p>
+<a class="btn btn-primary" asp-action="Index">Quay lại trang chủ.</a>
+</div>

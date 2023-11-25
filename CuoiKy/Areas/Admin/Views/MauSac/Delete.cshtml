@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+}
+@model MauSac 
+<div class=" container">
+    <h3>Xóa màu</h3>
+    <form method="post" asp-action="DeleteConfirm">
+        <input asp-for="Id" type="hidden"/>
+        <label>Tên màu</label>
+        <input asp-for="Name" class=" form-control"/>
+        <span asp-validation-for="Name" class=" text-danger"></span>
+        <button class="btn btn-primary" type="submit"> Xóa </button>
+        <button class="btn btn-primary" type="submit"> Hủy </button>
+    </form>
+</div>

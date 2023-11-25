@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@model MauSac
+<div class=" container">
+    <h3>Chỉnh sửa màu sắc</h3>
+    <form method="post" asp-action="Edit">
+        <label>Tên màu</label>
+        <input asp-for="Name" class=" form-control"/>
+        <span asp-validation-for="Name" class=" text-danger"></span>
+        <button class="btn btn-primary" type="submit"> Lưu </button>
+        <button class="btn btn-primary" type="submit"> Hủy </button>
+    </form>
+</div>

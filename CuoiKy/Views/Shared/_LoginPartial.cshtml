@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<style>
+    .nav-link {
+        color: #828284;
+        display: inline-block;
+    }
+    .nav-link:hover {
+        color: #ff7500;
+    }
+    .profile {
+        position: relative;
+        background-image: url("../../images/user-image.jpg");
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size:cover;
+        width: 20px;
+        height: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        transition: all 1s ease-in !important;
+    }
+    .profile:hover .profile-manager {
+        display: block;
+    }
+    .profile-manager {
+        position: absolute;
+        z-index: 10;
+        top: 60px;
+        left: -20px;
+        max-width: 230px;
+        display: none;
+        text-align: left;
+        border: 2px solid #F5F5F5;
+        border-radius: 4px;
+        background-color: #F9F9F9;
+        transition: all 1s ease-in !important;
+    }
+    .profile-manager p {
+        padding: 8px 16px;
+    }
+    .profile-manager::before {
+        position: absolute;
+        z-index: 20;
+        top: -32px;
+        left: 24px;
+        border-top: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 20px solid #F9F9F9;
+        border-left: 15px solid transparent;
+        width: 0; height:0;
+        content: "";
+    }
+    .profile-manager * {
+        text-align: left;
+        width: 100%;
+        border-bottom: 1px solid #e3e3e3;
+    }
+    .profile-manager:last-child {
+        border-bottom: none;
+        border-radius: 4px;
+    }
+</style>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="profile">
+        <div class="profile-manager">
+            <p>Chào @User.Identity?.Name!</p>
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Tài khoản</a>
+            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Checkout" title="Manage">Giỏ hàng</a>
+            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link">Đăng Xuất</button>
+            </form>
+        </div>
+    </div>
+    
+}
+else
+{
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Đăng Ký</a>
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Đăng Nhập</a>
+}
+

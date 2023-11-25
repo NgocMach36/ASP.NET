@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model MauSac 
+<div class=" container">
+    <h3>Thêm mới màu sắc</h3>
+    <form method="post">
+        <label>Tên màu</label>
+        <input asp-for="Name" class=" form-control"/>
+        <span asp-validation-for="Name" class=" text-danger"></span>
+        <button class="btn btn-primary" type="submit"> Tạo mới </button>
+    </form>
+</div>
+<partial name="_ValidationScriptsPartial"/>

@@ -1,0 +1,244 @@
+﻿@model GioHangViewModel
+
+<style>
+	.delete-item {
+		cursor: pointer;
+	}
+	.checkout {
+		height: min-content;
+		background-color: #f9f9f9;
+		border-radius: 4px;
+		border: 1px solid #ededed;
+		color: #868282;
+		padding: 20px;
+	}
+	.checkout a {
+		color: #868282;
+	}
+	.checkout > table {
+		width: 100%;
+	}
+	.checkout th {
+		font-size: 20px;
+	}
+	.checkout td {
+		
+		padding: 8px 0;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.text-right {
+		
+	}	
+	.total {
+		padding: 24px 0 !important;
+		font-weight: bold;
+		color: #898585;
+	}
+</style>
+
+<div class="banner_inner">
+	<div class="services-breadcrumb">
+		<div class="inner_breadcrumb">
+
+			<ul class="short">
+				<li>
+					<a asp-action="Index">Home</a>
+					<i>|</i>
+				</li>
+				<li>Checkout </li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+	<div class="container">
+		<div class="inner-sec-shop px-lg-4 px-3">
+			<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+			<div class="checkout-right">
+				@*<h4>Your shopping cart contains:
+					<span>3 Products</span>
+				</h4>*@
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>SL No.</th>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Product Name</th>
+
+							<th>Price</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						@{
+							var i = 1;
+							foreach(var item in Model.DsGioHang)
+						{
+																																										<tr class="rem1">
+																																										<td class="invert">@(i++)</td>
+																																										<td class="invert-image">
+																																											<a asp-action="Single">
+																																												<img src="@item.SanPham.ImageUrl" alt=" " class="img-responsive">
+																																											</a>
+																																										</td>
+																																										<td class="invert">
+																																											<div class="quantity">
+																																												<div style="min-width:150px;" class="quantity-select">
+																																													<!-- <div class="entry value-minus">&nbsp;</div> -->
+																																													<a asp-action="Giam" asp-route-giohangId="@item.Id" style="min-width: 26px; color: #000"
+																class="btn btn-decrement btn-spinner" type="button">
+																																													<i class="fa-solid fa-minus"></i>
+																																													</a>
+																																													<div class="entry value">
+																																														<span>@item.Quantity</span>
+																																													</div>
+																																													<!-- <div class="entry value-plus active">&nbsp;</div> -->
+																																													<a asp-action="Tang" asp-route-giohangId="@item.Id" style="min-width: 26px; color: #000"
+																class="btn btn-decrement btn-spinner" type="button">
+																																													<i class="fa-solid fa-plus"></i>
+																																													</a>
+																																												</div>
+																																											</div>
+																																										</td>
+																																										<td class="invert">@item.SanPham.Name </td>
+
+																																										<td style="min-width:150px;" class="invert">@String.Format("{0:0,0}", (@item.ProductPrice)) VNĐ</td>
+																																										<td class="invert">
+																																											<div class="rem">
+																																												<a asp-action="Xoa" asp-route-giohangId="@item.Id" class="btn-remove" style="min-width: 26px; color: #000">
+																																													<i class="fa-solid fa-xmark"></i>
+																																												</a>
+																																											</div>
+
+																																										</td>
+																																									</tr>
+						}}
+					</tbody>
+				</table>
+			</div>
+			<div class="checkout-left row">
+				<div class="col-md-4 checkout">
+					
+					<table class="table-total">	
+					<h4>Hoá đơn</h4>
+					<thead>
+						<tr>
+							<th>Sản phẩm</th>
+							<th class="text-right">Giá</th>
+						</tr>
+					</thead>
+					<tbody>
+							@{
+								foreach(var item in Model.DsGioHang)
+								{
+																<tr>
+																<td><a href="#">@item.SanPham.Name</a></td>
+																<td class="text-right">@String.Format("{0:0,0}", @item.ProductPrice) VNĐ</td>
+																</tr>
+}
+													<tr>
+													<td class="total">Tổng</td>
+													<td class="text-right total">@String.Format("{0:0,0}", @Model.HoaDon.Total) VNĐ</td>
+													</tr>
+							}
+					</tbody>
+					</table>
+				</div>
+				<div class="col-md-8 address_form">
+					<h4>Thông tin khách hàng</h4>
+					<form asp-action="Checkout" method="post" class="creditly-card-form agileinfo_form">
+						<section class="creditly-wrapper wrapper">
+							<div class="information-wrapper">
+								<div class="first-row form-group">
+									<div class="controls">
+										<label class="control-label">Họ Và Tên: </label>
+										<input asp-for="HoaDon.Name" type="text" class="billing-address-name form-control" placeholder="Họ Và Tên">
+									</div>
+									<div class="card_number_grids">
+										<div class="card_number_grid_left">
+											<div class="controls">
+												<label class="control-label">Số Điện Thoại:</label>
+												<input asp-for="HoaDon.PhoneNumber" type="text" class="form-control"  placeholder="Số Điện Thoại">
+											</div>
+										</div>
+										<div class="card_number_grid_right">
+											<div class="controls">
+												<label class="control-label">Địa Chỉ: </label>
+												<input asp-for="HoaDon.Address" type="text" class="form-control" placeholder="Địa Chỉ">
+											</div>
+										</div>
+										<div class="clear"> </div>
+									</div>
+								</div>
+								<button class="submit check_out" type="submit">Giao Đến Địa Chỉ Này</button>
+							</div>
+						</section>
+					</form>
+				</div>
+
+				<div class="clearfix"> </div>
+
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+<script src="~/js/jquery-2.2.3.min.js"></script>
+
+<script src="~/js/easy-responsive-tabs.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#horizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion           
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#tabInfo');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
+				}
+			});
+			$('#verticalTab').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true
+			});
+		});
+	</script>
+	<!--quantity-->
+	<script>
+		$('.value-plus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) + 1;
+			divUpd.text(newVal);
+		});
+
+		$('.value-minus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) - 1;
+			if (newVal >= 1) divUpd.text(newVal);
+		});
+	</script>
+	<!--quantity-->
+	<script>
+const xoa = (id, row) => {
+    $.ajax({
+        url: `Delete/${id}`,
+        type: "POST",
+        success: function(data) {
+            row.closest("tr").remove();
+        }
+    })
+        .done(function(data) {
+            row.closest("tr").remove();
+        })
+}
+</script>

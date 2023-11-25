@@ -1,0 +1,131 @@
+﻿
+
+<style>
+	.top_googles_cart {
+        position: relative;
+	    text-align: center;
+        background: none;
+        letter-spacing: 2px;
+        color: #454546;
+        border: 1px solid #dde2e6;
+        border-radius: 4px;
+        padding: 0.5em 1em;
+        cursor: default;
+        transition: all 1s ease-in;
+	}
+    .top_googles_cart:hover > .giohang{
+        display: block;
+    }
+    .giohang {
+        display: none;
+        z-index: 10;
+        position: absolute;
+        top: calc(100% + 20px);
+        right: 0;
+        min-width: 600px;
+        border: 1px solid #f5f5f5;
+        border-radius: 4px;
+        background-color: #F9F9F9;
+
+    }
+    .giohang-items {
+        height: 300px;
+        overflow: auto;
+    }
+    .giohang::before {
+        position: absolute;
+        z-index: 20;
+        top: -32px;
+        right: 16px;
+        border-top: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 20px solid #F9F9F9;
+        border-left: 15px solid transparent;
+        width: 0; height:0;
+        content: "";
+    }
+    .giohang::after {
+        position: absolute;
+        top: -32px;
+        right: 0px;
+        content: "";
+        width: 140px;
+        height: 36px;
+    }
+    .items {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        border-bottom: 1px solid #e3e3e3;
+    }
+    .item-image{
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
+    .item-text {
+        display: flex;
+        width:300px;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-direction: column;
+    }
+    .item-name {
+        font-weight: bold;
+    }
+    .item-quantity {
+        text-align: left;
+        width: 40px;
+    }
+    .item-price {
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .giohang-link {
+        display: block;
+        padding: 8px;
+        color: #ff4e00;
+    }
+    .item-remove {
+        padding: 8px;
+        padding-right: 0;
+        color: #e92424;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="top_googles_cart">
+	Giỏ hàng
+	<i class="fas fa-cart-arrow-down"></i>
+    <div class="giohang">
+            <div class="giohang-items">
+            @foreach (var item in ViewBag.GioHang)
+            {
+                <div class="items"> 
+                    <image class="item-image" src="@item.SanPham.ImageUrl">
+                    <div class="item-text">
+                        <span class="item-name">@item.SanPham.Name</span>
+                        <span class="item-description">@item.SanPham.Description</span>
+                    </div>
+                        <span class="item-quantity"><span>x</span>@item.Quantity</span>
+                        <span class="item-price">
+                            @{
+                                                                @String.Format("{0:0,0}", (item.Quantity * item.SanPham.Price));
+                            }
+                             VNĐ
+                        </span>
+                        <a asp-action="XoaGioHang" asp-route-giohangId="@item.Id" >
+                        <i class="item-remove fa-solid fa-xmark"></i>
+                        </a>
+                </div>
+                
+            }
+            </div>
+            <a class="giohang-link" asp-area="Customer" asp-controller="Home" asp-action="Checkout">Xem Tất cả</a>
+    </div>
+</div>

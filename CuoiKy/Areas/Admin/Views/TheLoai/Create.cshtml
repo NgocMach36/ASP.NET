@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model TheLoai 
+<div class=" container">
+    <h3>Thêm mới thể loại</h3>
+    <form method="post">
+        <label>Tên thể loại</label>
+        <input asp-for="Name" class=" form-control"/>
+        <span asp-validation-for="Name" class=" text-danger"></span>
+        <label>Ngày tạo</label>
+        <input asp-for="DateCreate" class="form-control"/>
+        <span asp-validation-for="DateCreate" class=" text-danger"></span>
+        <button class="btn btn-primary" type="submit"> Tạo mới </button>
+    </form>
+</div>
+<partial name="_ValidationScriptsPartial"/>

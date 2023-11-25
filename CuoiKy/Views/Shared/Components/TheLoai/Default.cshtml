@@ -1,0 +1,8 @@
+﻿@model IEnumerable<TheLoai>
+<h5 class="tittle-w3layouts-sub"> Danh mục sản phẩm bán </h5>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li> <a href="#"> @item.Name </a></li>
+    }
+</ul>

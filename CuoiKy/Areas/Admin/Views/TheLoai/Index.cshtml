@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Tên Thể Loại</th>
+                <th>Ngày Tạo</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+
+        <tbody>
+@foreach (var theloai in ViewBag.TheLoai)
+{
+            <tr>
+                <td width="40%">@theloai.Name</td>
+                <td width="35%">@theloai.DateCreate</td>
+                <td width="25%">
+                    <a asp-action="Edit" asp-route-id = "@theloai.Id"> Edit </a>
+                    <a asp-action="Details" asp-route-id ="@theloai.Id"> Details </a>
+                    <a asp-action="Delete" asp-route-id ="@theloai.Id"> Delete </a>
+                    </td> 
+            </tr>
+}
+        </tbody>
+
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
+
+</div>

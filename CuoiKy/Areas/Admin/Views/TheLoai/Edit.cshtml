@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@model TheLoai 
+<div class=" container">
+    <h3>Chỉnh sửa thể loại</h3>
+    <form method="post" asp-action="Edit">
+        <label>Tên thể loại</label>
+        <input asp-for="Name" class=" form-control"/>
+        <span asp-validation-for="Name" class=" text-danger"></span>
+        <label>Ngày tạo</label>
+        <input asp-for="DateCreate" class="form-control"/>
+        <button class="btn btn-primary" type="submit"> Lưu </button>
+        <button class="btn btn-primary" type="submit"> Hủy </button>
+    </form>
+</div>

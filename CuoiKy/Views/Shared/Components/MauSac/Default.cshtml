@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MauSac>
+<h5 class="tittle-w3layouts-sub"> Danh mục màu sắc hiện có</h5>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li> <a href="#"> @item.Name </a></li>
+    }
+</ul>
+
+

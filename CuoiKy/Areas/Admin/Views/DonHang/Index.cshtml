@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <table class=" table">
+         <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Tình trạng</th>
+                <th>Tổng cộng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Address</td>
+                    <td>@item.OrderStatus</td>
+                    <td>@item.Total</td>
+                    <td>
+                        <button class=" btn btn-primary">Chi tiết</button>
+                    </td>
+                 </tr>
+            }
+        </tbody>
+    </table>
+</div>
